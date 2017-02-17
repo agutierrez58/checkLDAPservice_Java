@@ -1,5 +1,5 @@
 
-package net.kraken.tutorial.ldap;
+package net.kraken.tutorial.ldap.personesPwds;
 
 import java.util.Hashtable;
 
@@ -47,7 +47,7 @@ import javax.naming.directory.SearchResult;
  * http://stackoverflow.com/questions/23689964/javax-naming-authenticationexception-ldap-error-code-49-invalid-credentials
  * 
  * */
-public class checkLDAP {
+public class checkLDAP_Pwds {
 
   /**
    * @param args
@@ -57,14 +57,17 @@ public class checkLDAP {
 		  
     //Setup the environment to login as 'Directory Manager'
     String rootDN = "cn=admin";
-    String rootPWD = "admin";
+	  //String rootDN = "cn=admin,dc=kraken,dc=net";
     
+    String rootPWD = "admin";
+    // /dc=kraken,dc=net
     Hashtable<String, String> environment = new Hashtable<String, String>();
     environment.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
-    environment.put(Context.PROVIDER_URL, "ldap://localhost:389/cn=admin,dc=kraken,dc=net");
-   // environment.put(Context.SECURITY_AUTHENTICATION, "simple");
-   // environment.put(Context.SECURITY_PRINCIPAL, rootDN);
-   // environment.put(Context.SECURITY_CREDENTIALS, rootPWD);
+    environment.put(Context.PROVIDER_URL, "ldap://portatil.kraken.net:389/dc=kraken,dc=net");
+  
+    environment.put(Context.SECURITY_AUTHENTICATION, "simple");
+    environment.put(Context.SECURITY_PRINCIPAL, rootDN);
+    environment.put(Context.SECURITY_CREDENTIALS, rootPWD);
 
     DirContext dirContext = null;
     NamingEnumeration<?> results = null;
